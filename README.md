@@ -6,27 +6,27 @@ This project is a comprehensive e-commerce platform inspired by Flipkart. It is 
 
 ## Features
 
-- User Authentication Secure login and registration system.
-- Product Management: Add, edit, and delete products.
-- Cart Operations: Add to cart, view cart, and manage cart items.
-- Order Processing: Place orders, view order history, and track orders.
-- Responsive Design: Optimized for different screen sizes and devices.
+- **User Authentication**: Secure login and registration system.
+- **Product Management**: Add, edit, and delete products.
+- **Cart Operations**: Add to cart, view cart, and manage cart items.
+- **Order Processing**: Place orders, view order history, and track orders.
+- **Responsive Design**: Optimized for different screen sizes and devices.
 
 ## Technologies Used
 
 ### Frontend
 
-- Angular
-- TypeScript
-- HTML
-- Tailwind CSS
-- NGRX Store (for state management)
+- **Angular**
+- **TypeScript**
+- **HTML**
+- **Tailwind CSS**
+- **NGRX Store** (for state management)
 
 ### Backend
 
-- Spring Boot
-- Hibernate
-- MySQL
+- **Spring Boot**
+- **Hibernate**
+- **MySQL**
 
 ## Project Structure
 
@@ -71,6 +71,8 @@ flipkart-clone-backend/
 │   │       ├── application.properties
 ├── pom.xml
 ```
+
+## Installation and Setup
 
 ### Prerequisites
 
@@ -123,3 +125,4 @@ flipkart-clone-backend/
 
 - Open the frontend application in your browser at `http://localhost:4200`.
 - The backend server will be running at `http://localhost:3333`.
+
