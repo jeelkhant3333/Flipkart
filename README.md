@@ -6,11 +6,11 @@ This project is a comprehensive e-commerce platform inspired by Flipkart. It is 
 
 ## Features
 
-- User Authentication**: Secure login and registration system.
-- Product Management**: Add, edit, and delete products.
-- Cart Operations**: Add to cart, view cart, and manage cart items.
-- Order Processing**: Place orders, view order history, and track orders.
-- Responsive Design**: Optimized for different screen sizes and devices.
+- User Authentication Secure login and registration system.
+- Product Management: Add, edit, and delete products.
+- Cart Operations: Add to cart, view cart, and manage cart items.
+- Order Processing: Place orders, view order history, and track orders.
+- Responsive Design: Optimized for different screen sizes and devices.
 
 ## Technologies Used
 
