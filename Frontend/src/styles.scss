@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    margin: 0;
+    font-family: Roboto, Arial , sans-serif;
+    // background: #0b0b0b;
+    // color: white;
+    background:#F1F2F4;
+    color: black;
+}
+
+.box{
+    // box-shadow: #000000 0px 5px 15px;
+    box-shadow: #c4bbbb 0px 5px 15px;
+    // padding: 15px;
+}
+
+.hideScrollbar::-webkit-scrollbar{
+    display: none;
+}
+
+.matBgColor{
+    background-color:#2874F0;
+}
+
+.textGray{
+    color: #878787;
+    font-size: 14px;
+}

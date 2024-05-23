@@ -1,0 +1,37 @@
+<div class="w-full ">
+
+    <div class="bg-white text-black w-full h-1/2 shadow-lg p-6">
+
+        <div class="flex justify-around">
+
+            <!-- Sections -->
+            <div class="flex flex-col" *ngFor="let item of category[selectedSection].sections">
+                <h1 class="text-center text-neutral-950">{{item.name}}</h1>
+                <button 
+                class="mt-5 right-0 left-0 hover:scale-110 hover:text-gray-950 text-gray-600 cursor-pointer" 
+                (click)="handleNavigate('/'+ selectedSection + '/' + item.id + '/' + section.id)"
+                mat-button *ngFor="let section of item.items">{{section.name}}</button>
+            </div>
+            <!-- New Arival 1 -->
+            <div class="hidden lg:block">
+                <div class="mb-5">
+                    <img class="w-[19rem] h-[20rem] object-cover object-top rounded-md"
+                        src="https://anayadesignerstudio.com/wp-content/uploads/2024/02/Trendy-Gown-Design-For-Wedding-2024-370x555.jpg"
+                        alt="">
+                </div>
+                <p class="text-black text-lg">New Arival</p>
+            </div>
+            <!-- New Arival 2 -->
+            <div class="hidden lg:block">
+                <div class="mb-5">
+                    <img class="w-[19rem] h-[20rem] object-cover object-top rounded-md"
+                        src="https://assets0.mirraw.com/images/11307834/88E_long_webp.webp?1710774799"
+                        alt="">
+                </div>
+                <p class="text-black text-lg">New Arival</p>
+
+            </div>
+        </div>
+    </div>
+
+</div>

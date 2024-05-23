@@ -1,0 +1,21 @@
+server:
+  port: 3333
+
+spring:
+  main:
+    banner-mode: off
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/flipkart
+    username: springstudent
+    password: springstudent
+
+
+
+
+logging:
+  level:
+    root: warn
+    sql: trace

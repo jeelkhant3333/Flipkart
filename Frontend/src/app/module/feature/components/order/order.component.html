@@ -1,0 +1,42 @@
+<div class="py-20 px-5 lg:px-20">
+
+    <h1 class="text-lg font-bold text-center py-10">My Orders</h1>
+
+    <div class="lg:grid grid-cols-4 gap-5">
+
+        <div class="col-span-1">
+
+            <div class="">
+
+                <div *ngFor="let option of orderFilter">
+
+                    <div class="flex items-center">
+
+                        <mat-checkbox color="primary" [id]="option.value" [value]="option.value">
+                            <span class="text-sm textGray">{{option.label}}</span>
+                        </mat-checkbox>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-span-3 scroll-py-5">
+
+            <div class="space-y-5" *ngFor="let item of orders">
+
+                <div (click)="navigateToOrderDetails(1)" *ngFor="let orderItem of item">
+
+                    <app-order-card />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,9 @@
+<span *ngFor="let star of stars" 
+class="star" 
+(click)="rate(star)"
+[ngClass]="{'active':star<=currentRating}">
+
+<mat-icon style="color: #388E3C;">{{star<=currentRating? 'star':'star_border'}}</mat-icon>
+
+
+</span>

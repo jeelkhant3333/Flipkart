@@ -1,0 +1,32 @@
+<div class="py-16 px-5 lg:px-20">
+
+    <div>
+
+        <h1 class=" py-2">Order Status</h1>
+
+        <app-order-tracker activeStep="2" [steps]="steps"/>
+
+    </div>
+
+    <div class="space-y-10 pt-10 ">
+
+        <div class="box px-5 bg-white">
+
+            <p class="font-normal py-5 text-[24px]">Shipping Address</p>
+            
+            <app-address-card/>
+        </div>
+
+        <div class="space-y-6 mt-20">
+
+            <div *ngFor="let orderItem of orders">
+
+                <app-order-card/>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

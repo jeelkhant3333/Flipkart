@@ -1,0 +1,80 @@
+<main class="mt-10 ">
+
+    <div class="py-10 grid lg:grid grid-cols-3 lg:px-16 relative ">
+
+        <!-- Left Side -->
+        <section class="lg:col-span-2 lg:px-5 ">
+
+            <div class="box p-5 space-y-3 bg-white">
+
+                <ng-container *ngIf="cartItems">
+
+                    <div *ngFor="let product of cartItems; let last=last">
+                        <app-cart-item [cartItem]="product"/>
+                        <!-- <mat-divider *ngIf="!last"></mat-divider> -->
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </section>
+
+        <!-- Right Side -->
+        <section class="px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0 ">
+
+            <ng-container *ngIf="cartItems">
+
+                <div class="box bg-white">
+
+                    <p class=" border-b-[1px] w-full h-full font-medium text-[16px] text-[#878787] py-3 px-6 ">PRICE DETAILS</p>
+                    <!-- <mat-divider></mat-divider> -->
+                    <div class="px-6">
+
+                        <div class="flex justify-between my-5">
+
+                            <span>Total Price</span>
+                            <span>₹5999</span>
+
+                        </div>
+                        <div class="flex justify-between my-5">
+
+                            <span>Discount</span>
+                            <span class="text-green-600">- ₹3000</span>
+
+                        </div>
+                        <div class="flex justify-between my-5">
+
+                            <span>Delivery Charges</span>
+                            <span class="text-green-600">Free</span>
+
+                        </div>
+
+                        <mat-divider></mat-divider>
+                        <div class="flex justify-between font-medium text-lg my-5">
+
+                            <span>Total Amount</span>
+                            <span class="text-green-600">₹3000</span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="px-6 pb-5">
+                        <button 
+                        mat-flat-button
+                        (click)="navigateToChechout()"
+                        style="padding: 0.5rem; color: white;"
+                        class="text-lg py-3 px-10 w-full matBgColor hover:scale-105"
+                        >CHECKOUT</button>
+                    </div>
+                   
+                </div>
+
+            </ng-container>
+
+        </section>
+
+    </div>
+
+</main>

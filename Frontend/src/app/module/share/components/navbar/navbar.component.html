@@ -1,0 +1,73 @@
+<div class="fixed top-0 z-50 right-0 left-0 text-[#000000] bg-[#ffffff]">
+    <!-- bg-[#69f0ae] -->
+
+    <!-- Navbar -->
+    <div class="lg:px-20 px-5 h-16  flex items-center justify-between">
+
+        <!-- Right Side Content -->
+        <div class="flex items-center">
+
+            <!-- Logo -->
+            <div class="mr-5">
+                <a>
+                    <img class="w-8"
+                        src="https://yt3.googleusercontent.com/cT40lDWqE99Ch52R3ftuAExjmjF-yZiY5rUSv_0Q3NXhcqzmiax8ReXuS4Qe53Fizcaw4hEX=s176-c-k-c0x00ffffff-no-rj"
+                        alt="appLogo">
+                </a>
+            </div>
+            <!-- Manu -->
+            <div>
+
+                <div class="flex space-x-4 items-center">
+                    <a routerLink="/" class="hover:scale-110 cursor-pointer font-bold-00 text-lg">Home</a>
+                    <button
+                        class="group focus:outline-none focus:scale-110 focus:text-[#2874F0] hover:text-[#2874F0] hover:scale-110 cursor-pointer font-bold-700 text-lg open-button"
+                        (click)="openNavbarContent('men')"
+                         mat-mdc-button>Men</button>
+                    <button
+                        class="group focus:outline-none focus:scale-110 focus:text-[#2874F0] hover:text-[#2874F0] hover:scale-110 cursor-pointer font-bold-700 text-lg open-button"
+                        (click)="openNavbarContent('women')" mat-mdc-button>Women</button>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- Left Side Content -->
+        <div class="flex items-center justify-between">
+            <button class="hover:scale-110 cursor-pointer" (click)="navigateTo('cart')" mat-icon-button>
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+            <!-- If Else -->
+            <button class="font-bold-700 text-lg hover:scale-110 cursor-pointer" (click)="handleOpenLoginModal()"
+                *ngIf="!userProfile" mat-raised-button> Login
+            </button>
+            <div *ngIf="userProfile" class="ml-3 flex items-center">
+
+                <div class="flex items-center justify-between">
+
+                    <span class="open-button font-bold-700 text-lg">{{userProfile.firstName}}</span>
+                    <button mat-button [matMenuTriggerFor]="profileMenu">
+                        <img class="h-5 w-5 hover:scale-110 cursor-pointer"
+                            src="https://cdn.pixabay.com/photo/2013/07/12/14/36/man-148582_1280.png" alt="">
+                    </button>
+                    <mat-menu #profileMenu="matMenu">
+                        <button mat-menu-item>Profile</button>
+                        <button mat-menu-item (click)="navigateTo('account/orders')">Orders</button>
+                        <button mat-menu-item (click)="handleLogOut()">Logout</button>
+                    </mat-menu>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    
+    <!-- Navbar Content -->
+    <div class="absolute right-0 left-0 modal-container" *ngIf="isNavbarContentOpen">
+        <app-nav-content [selectedSection]="currentSection" />
+
+    </div>
+
+</div>

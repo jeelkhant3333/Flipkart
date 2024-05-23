@@ -1,0 +1,236 @@
+<div class="p-5 lg:p-10">
+
+    <p class="text-gray-500 py-5 text-[20px]">{{product.category.parentCategory.parentCategory.name+'  /  '+product.category.parentCategory.name+'  /  '+product.category.name+'  /  '+product.brand}}</p>
+
+    <!-- Details Section -->
+    <section class="lg:grid grid-cols-3 lg:gap-10">
+
+        <!-- Image -->
+        <div class="col-span-2 flex flex-col items-center">
+
+            <img [src]="product.imageUrl"
+                alt="">
+
+        </div>
+
+        <!-- Details -->
+        <div class="bg-white p-5">
+
+            <!-- Brand & Title -->
+            <div class="col-span-1 space-y-10">
+
+                <div>
+
+                    <p class="font-semibold text-gray-600 text-lg">{{product.brand}}</p>
+                    <p class="text-xl">{{product.title}}</p>
+
+                </div>
+
+            </div>
+
+            <!-- Pricing -->
+            <div class="flex items-center space-x-5">
+
+                <p class="text-lg font-semibold">₹{{product.discountedPrice}}</p>
+                <p class="text-lg text-gray-500 line-through">₹{{product.price}}</p>
+                <p class="font-semibold text-lg text-green-500">{{product.discountPercent}}%</p>
+
+            </div>
+
+            <!-- Size -->
+            <div>
+
+                <p class="text-lg">size</p>
+                <mat-radio-group class="space-x-5" aria-label="Select an option" [(ngModel)]="selectedSize"
+                    color="primary">
+                    <mat-radio-button value="S"><span>S</span></mat-radio-button>
+                    <mat-radio-button value="M"><span>M</span></mat-radio-button>
+                    <mat-radio-button value="L"><span>L</span></mat-radio-button>
+                    <mat-radio-button value="XL"><span>XL</span></mat-radio-button>
+                </mat-radio-group>
+
+            </div>
+
+            <!-- Add Button -->
+            <div>
+                <button style="padding: 1.5rem; background-color:#2874F0; color: white;" class="w-full mt-5 mb-5" (click)="handleAddToCart()" mat-raised-button
+                    >Add To Cart</button>
+            </div>
+
+            <!-- Discription -->
+            <div>
+
+                <p class="text-gray-600">{{product.description}}</p>
+<!-- 
+                <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio voluptatum quod
+                    magnam, est iure, corporis et aliquid nobis molestias aperiam maiores aut tenetur accusamus delectus
+                    soluta? Eum rem error officia.</p> -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Review Section -->
+    <section class="pt-20 pb-10 ">
+        <h1 class="font-medium text-lg">Reviews & Ratings</h1>
+        <div class="border bg-white p-10">
+
+            <div class="lg:grid grid-cols-12 gap-7">
+
+                <!-- Left Side -->
+                <div class="col-span-7">
+
+                    <div class="space-y-5">
+                        <div *ngFor="let item of reviews">
+                            <app-product-review-card />
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Side  -->
+                <div class="col-span-5 mt-10 lg:mt-0">
+
+                    <div class="box p-3">
+                        <span class="text-xl font-medium">Product Ratings</span>
+                        <div class="flex items-center my-2">
+                            <app-star-rating/>
+                            <span class="ml-1 font-medium">54321 Ratings</span>
+
+                        </div>
+
+                        <div class="space-y-3">
+                            <!-- Excelent -->
+                            <div>
+                                <div class="grid grid-cols-12 justify-around items-center">
+
+                                    <div class="col-span-2">
+                                        <span>Excellent</span>
+                                    </div>
+
+                                    <div class="col-span-8 px-4">
+                                        <mat-progress-bar color="primary" mode="determinate"
+                                            value="40"></mat-progress-bar>
+                                    </div>
+
+                                    <div class="col-span-2">
+                                        <span class="opacity-50">4321</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- Very Good -->
+                            <div>
+                                <div class="grid grid-cols-12 justify-around items-center">
+
+                                    <div class="col-span-2">
+                                        <span>Very Good</span>
+                                    </div>
+
+                                    <div class="col-span-8 px-4">
+                                        <mat-progress-bar color="primary" mode="determinate"
+                                            value="40"></mat-progress-bar>
+                                    </div>
+
+                                    <div class="col-span-2">
+                                        <span class="opacity-50">4321</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- Good -->
+                            <div>
+                                <div class="grid grid-cols-12 justify-around items-center">
+
+                                    <div class="col-span-2">
+                                        <span>Good</span>
+                                    </div>
+
+                                    <div class="col-span-8 px-4">
+                                        <mat-progress-bar color="primary" mode="determinate"
+                                            value="40"></mat-progress-bar>
+                                    </div>
+
+                                    <div class="col-span-2">
+                                        <span class="opacity-50">4321</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- Average -->
+                            <div>
+                                <div class="grid grid-cols-12 justify-around items-center">
+
+                                    <div class="col-span-2">
+                                        <span>Average</span>
+                                    </div>
+
+                                    <div class="col-span-8 px-4">
+                                        <mat-progress-bar color="primary" mode="determinate"
+                                            value="40"></mat-progress-bar>
+                                    </div>
+
+                                    <div class="col-span-2">
+                                        <span class="opacity-50">4321</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- Poor -->
+                            <div>
+                                <div class="grid grid-cols-12 justify-around items-center">
+
+                                    <div class="col-span-2">
+                                        <span>Poor</span>
+                                    </div>
+
+                                    <div class="col-span-8 px-4">
+                                        <mat-progress-bar color="primary" mode="determinate"
+                                            value="40"></mat-progress-bar>
+                                    </div>
+
+                                    <div class="col-span-2">
+                                        <span class="opacity-50">4321</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="mt-10">
+        
+        <h1 class="font-medium text-lg">Related Products</h1>
+        <div class="mt-5 pt-5 flex flex-wrap justify-around bg-white ">
+
+            <div *ngFor="let item of relatedProducts">
+
+                <app-product-card [product]="item"/> 
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
