@@ -4,10 +4,10 @@ import com.techspine.ecommerce.entity.Cart;
 import com.techspine.ecommerce.entity.CartItem;
 import com.techspine.ecommerce.entity.Product;
 import com.techspine.ecommerce.entity.User;
+import com.techspine.ecommerce.exception.CartitemException;
 import com.techspine.ecommerce.exception.ProductException;
-import com.techspine.ecommerce.repository.CartItemRepository;
+import com.techspine.ecommerce.exception.UserException;
 import com.techspine.ecommerce.repository.CartRepository;
-import com.techspine.ecommerce.repository.ProductRepository;
 import com.techspine.ecommerce.request.AddItemRequest;
 import com.techspine.ecommerce.service.cartiItem.CartItemService;
 import com.techspine.ecommerce.service.product.ProductService;
@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CartServiceImpl implements CartService{
 
-    private CartRepository cartRepository;
-    private CartItemService cartItemService;
-    private ProductService productService;
+    private final CartRepository cartRepository;
+    private final CartItemService cartItemService;
+    private final ProductService productService;
 
     public CartServiceImpl(CartRepository cartRepository, CartItemService cartItemService, ProductService productService) {
         this.cartRepository = cartRepository;
@@ -32,7 +32,7 @@ public class CartServiceImpl implements CartService{
     public Cart createCart(User user) {
         Cart cart = new Cart();
         cart.setUser(user);
-        return cart;
+        return cartRepository.save(cart);
     }
 
     @Override
@@ -59,7 +59,9 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public Cart findUserCart(Long userId) {
+//        System.out.println("findUserCart");
         Cart cart = cartRepository.findByUserId(userId);
+//        System.out.println("get cart " + cart);
         int totalPrice=0;
         int totalDiscountedPrice=0;
         int totalItem=0;
@@ -75,5 +77,14 @@ public class CartServiceImpl implements CartService{
         cart.setTotalItem(totalItem);
         cart.setDiscount(totalPrice-totalDiscountedPrice);
         return  cartRepository.save(cart);
+    }
+
+    @Override
+    @Transactional
+    public String removeCartItem(Long userId, Long itemId) throws UserException, CartitemException {
+        Cart cart = cartRepository.findByUserId(userId);
+        CartItem item = cartItemService.findCartItemById(itemId);
+        cart.getCartItems().remove(item);
+        return "Item Removed";
     }
 }

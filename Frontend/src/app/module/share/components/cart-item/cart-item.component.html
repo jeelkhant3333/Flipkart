@@ -32,8 +32,8 @@
     
             <div class="example-button-container">
     
-                <button class="roundedButton hover:scale-105" (click)="updateCartItem(-1)" 
-                [disabled]="cartItem.quantity==1"><mat-icon>remove</mat-icon></button>
+                <button class="roundedButton hover:scale-105 disabled:bg-gray-300" (click)="updateCartItem(-1)" 
+                [disabled]="cartItem.quantity===1"><mat-icon>remove</mat-icon></button>
     
             </div>
     

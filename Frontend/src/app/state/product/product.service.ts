@@ -5,6 +5,8 @@ import { Store } from "@ngrx/store";
 import { ActivatedRoute, Route, Router } from "@angular/router";
 import { catchError, map, of } from "rxjs";
 import { findProductByCategoryFailure, findProductByCategorySuccess, findProductByIdFailure, findProductByIdSuccess} from "./product.action";
+import { AppState } from "../../models/AppState";
+import { ProductState } from "./product.reducer";
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +21,7 @@ export class ProductService {
     }
 
     constructor(
-        private store: Store,
+        private store: Store<ProductState>,
         private http: HttpClient,
         private route: ActivatedRoute,
         private router: Router
@@ -95,11 +97,12 @@ export class ProductService {
     
     findProductsById(productId: any) {
       const headers = this.getHeader();
-
-        return this.http.get(`${this.apiUrl}/api/products/id/${productId}`, { headers}).pipe(
+    //   console.log("product id" , productId)
+        return this.http.get(`${this.apiUrl}/api/products/id/${productId}`, {headers})
+        .pipe(
             map((data: any) => {
-                console.log("id data", data)
-                return data
+                // console.log("Api res data", data)
+                return findProductByIdSuccess({payload:data})
             }),
             catchError((error) => {
                 console.log("error", error)
@@ -111,6 +114,9 @@ export class ProductService {
                     )
                 )
             })
-        )
+        ).subscribe((action)=>{
+            console.log("Product Action" , action)
+            this.store.dispatch(action)
+        })
     }
 }

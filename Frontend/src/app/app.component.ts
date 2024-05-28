@@ -30,11 +30,11 @@ export class AppComponent {
 
   }
 
+
+
   ngOnInit() {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('jwt')) {
-      this.userService.getUserProfile(this.http);
-      this.cartService.getCart().subscribe()
-    }
+        this.userService.getUserProfile();
+
   }
 
 }

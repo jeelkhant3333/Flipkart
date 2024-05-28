@@ -17,25 +17,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
-    private CartService cartItemService;
-    private AddressRepository addressRepository;
-    private UserRepository userRepository;
+    private final CartService cartItemService;
+    private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
     private OrderItemService orderItemService;
-    private OrderItemRepository orderItemRepository;
-    private OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
+    private final OrderRepository orderRepository;
 
 
-
-    OrderServiceImpl(CartService cartItemService, AddressRepository addressRepository, UserRepository userRepository, OrderItemService orderItemService, OrderItemRepository orderItemRepository, OrderRepository orderRepository){
-        this.cartItemService=cartItemService;
-        this.addressRepository=addressRepository;
-        this.userRepository=userRepository;
-        this.orderItemService=orderItemService;
-        this.orderRepository=orderRepository;
-        this.orderItemRepository=orderItemRepository;
+    OrderServiceImpl(CartService cartItemService, AddressRepository addressRepository, UserRepository userRepository, OrderItemService orderItemService, OrderItemRepository orderItemRepository, OrderRepository orderRepository) {
+        this.cartItemService = cartItemService;
+        this.addressRepository = addressRepository;
+        this.userRepository = userRepository;
+        this.orderItemService = orderItemService;
+        this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
     }
+
     @Override
     @Transactional
     public Order createOrder(User user, Address shippingAddress) {
@@ -46,6 +46,7 @@ public class OrderServiceImpl implements OrderService{
         userRepository.save(user);
 
         Cart cart=cartItemService.findUserCart(user.getId());
+        System.out.println("cart " + cart.getUser());
         List<OrderItem> orderItems=new ArrayList<>();
 
         for(CartItem item:cart.getCartItems()){
@@ -72,7 +73,7 @@ public class OrderServiceImpl implements OrderService{
         createdOrder.setOrderDate(LocalDateTime.now());
         createdOrder.setOrderStatus("PENDING");
         createdOrder.getPaymentDetails().setStatus("PENDING");
-        createdOrder.setCreateAt(LocalDateTime.now());
+        createdOrder.setCreatedAt(LocalDateTime.now());
 
         Order savedOrder=orderRepository.save(createdOrder);
 
@@ -85,22 +86,21 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order findOrderById(Long orderId) throws OrderException {
-        Optional<Order> opt=orderRepository.findById(orderId);
-        if(opt.isPresent()){
+        Optional<Order> opt = orderRepository.findById(orderId);
+        if (opt.isPresent()) {
             return opt.get();
         }
-        throw new OrderException("Order does not exist with id -"+ orderId);
+        throw new OrderException("Order does not exist with id -" + orderId);
     }
 
     @Override
     public List<Order> usersOrderHistory(Long userId) {
-        List<Order> orders=orderRepository.getUsersOrders(userId);
-        return orders;
+        return orderRepository.getUsersOrders(userId);
     }
 
     @Override
     public Order placedOrder(Long orderId) throws OrderException {
-        Order order=findOrderById(orderId);
+        Order order = findOrderById(orderId);
         order.setOrderStatus("PLACED");
         order.getPaymentDetails().setStatus("COMPLETED");
         return order;
@@ -108,28 +108,28 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order confirmedOrder(Long orderId) throws OrderException {
-        Order order=findOrderById(orderId);
+        Order order = findOrderById(orderId);
         order.setOrderStatus("CONFIRMED");
         return orderRepository.save(order);
     }
 
     @Override
     public Order shippedOrder(Long orderId) throws OrderException {
-        Order order=findOrderById(orderId);
+        Order order = findOrderById(orderId);
         order.setOrderStatus("SHIPPED");
         return orderRepository.save(order);
     }
 
     @Override
     public Order deliveredOrder(Long orderId) throws OrderException {
-        Order order=findOrderById(orderId);
+        Order order = findOrderById(orderId);
         order.setOrderStatus("DELIVERED");
         return orderRepository.save(order);
     }
 
     @Override
     public Order cancledOrder(Long orderId) throws OrderException {
-        Order order=findOrderById(orderId);
+        Order order = findOrderById(orderId);
         order.setOrderStatus("CANCELLED");
         return orderRepository.save(order);
     }
@@ -143,7 +143,7 @@ public class OrderServiceImpl implements OrderService{
     @Override
     @Transactional
     public void deleteOrder(Long orderId) throws OrderException {
-        Order order=findOrderById(orderId);
+        Order order = findOrderById(orderId);
         orderRepository.delete(order);
     }
 }

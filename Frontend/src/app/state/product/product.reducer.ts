@@ -3,31 +3,40 @@ import { findProductByCategorySuccess, findProductByIdSuccess, findProductByIdFa
 import { AppState } from "../../models/AppState"
 
 
-
-
-export const initialState = {
-    products: [],
-    loading: false,
-    error: null,
-    product: null
+export interface ProductState {
+    products: any[]
+    product: any; 
+    loading: boolean;
+    error: any;
 }
 
+export const initialState: ProductState = {
+    products: [],
+    product: null,
+    loading: false,
+    error: null,
+};
 export const productReducer = createReducer(
     initialState,
-    on(findProductByCategorySuccess, (state, { payload }) => {
-        console.log("paylod " , payload)
+    on(findProductByCategorySuccess, (state,action) => {
+        // console.log("paylod " , payload)
         return {
         ...state,
-        products: payload,
-        content: payload.content,
+        products: action.payload,
+        // content: payload.content,
         loading: false
     }}),
 
-    on(findProductByIdSuccess, (state, { payload }) => ({
-        ...state,
-        product: payload,
-        loading: false
-    })),
+    on(findProductByIdSuccess, (state, action) => {
+        console.log("action reducer" , action.payload)
+       return {
+            ...state,
+            product: action.payload,
+            loading: false,
+            error:null
+        
+    }
+       }),
 
     on(findProductByCategoryFailure,
         findProductByIdFailure,

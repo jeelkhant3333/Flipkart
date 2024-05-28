@@ -19,7 +19,8 @@
             <div>
 
                 <div class="flex space-x-4 items-center">
-                    <a routerLink="/" class="hover:scale-110 cursor-pointer font-bold-00 text-lg">Home</a>
+                        <a routerLink="" class="hover:scale-110 hover:text-[#2874F0] cursor-pointer font-bold-00 text-lg">Home</a>
+                    
                     <button
                         class="group focus:outline-none focus:scale-110 focus:text-[#2874F0] hover:text-[#2874F0] hover:scale-110 cursor-pointer font-bold-700 text-lg open-button"
                         (click)="openNavbarContent('men')"
@@ -39,9 +40,9 @@
             </button>
             <!-- If Else -->
             <button class="font-bold-700 text-lg hover:scale-110 cursor-pointer" (click)="handleOpenLoginModal()"
-                *ngIf="!userProfile" mat-raised-button> Login
+                *ngIf="userProfile.length===0" mat-raised-button> Login
             </button>
-            <div *ngIf="userProfile" class="ml-3 flex items-center">
+            <div *ngIf="userProfile.length!==0"class="ml-3 flex items-center">
 
                 <div class="flex items-center justify-between">
 
@@ -71,3 +72,6 @@
     </div>
 
 </div>
+
+
+<router-outlet></router-outlet>

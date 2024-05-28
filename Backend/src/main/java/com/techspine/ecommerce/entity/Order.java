@@ -7,34 +7,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "`order`")
 public class Order {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
+
     @Column(name = "order_id")
     private String orderId;
+
     @ManyToOne
     private User user;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems=new ArrayList<>();
+
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
+
+    @Column(name = "delivery_date")
     private LocalDateTime deliveryDate;
+
     @OneToOne
     private Address shippingAddress;
-    @Embedded
-    private PaymentDetails paymentDetails;
-    private double totalPrice;
-    private Integer totalDiscountedPrice;
-    private Integer discount;
-    private String orderStatus;
-    private int totalItem;
-    private LocalDateTime createAt;
 
-    public Order() {
+    @Embedded
+    private PaymentDetails paymentDetails=new PaymentDetails();
+
+    @Column(name = "total_price")
+    private double totalPrice;
+
+    @Column(name = "total_discounted_price")
+    private Integer totalDiscountedPrice;
+
+    @Column(name = "discount")
+    private Integer discount;
+
+    @Column(name = "order_status")
+    private String orderStatus;
+
+    @Column(name = "total_item")
+    private int totalItem;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    public Order(){
+
     }
 
-    public Order(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
+    public Order(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createdAt) {
         this.id = id;
         this.orderId = orderId;
         this.user = user;
@@ -48,7 +71,7 @@ public class Order {
         this.discount = discount;
         this.orderStatus = orderStatus;
         this.totalItem = totalItem;
-        this.createAt = createAt;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -155,11 +178,11 @@ public class Order {
         this.totalItem = totalItem;
     }
 
-    public LocalDateTime getCreateAt() {
-        return createAt;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

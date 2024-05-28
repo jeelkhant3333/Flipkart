@@ -5,16 +5,16 @@ import { login, loginFailure, loginSuccess, registerFailure, registerSuccess, re
 const initialState = {
     user:null,
     loading:false,
-    error:null
+    error:''
 }
 
 export const authReducer = createReducer(
     initialState,
-    on(login, (state)=> ({...state,loading:true,error:null})),
-    on(loginSuccess, (state , {user})=> ({...state,loading:false,error:null,user})),
+    on(login, (state)=> ({...state,loading:true,error:''})),
+    on(loginSuccess, (state, action)=> ({...state,loading:false,error:'',user:action.user})),
     on(loginFailure, (state , {error})=> ({...state,loading:true,error:error})),
 
-    on(register, (state)=> ({...state,loading:true,error:null})),
-    on(registerSuccess, (state , {user})=> ({...state,loading:false,error:null,user})),
+    on(register, (state)=> ({...state,loading:true,error:''})),
+    on(registerSuccess, (state)=> ({...state,loading:false,error:''})),
     on(registerFailure, (state , {error})=> ({...state,loading:true,error:error})),
 )

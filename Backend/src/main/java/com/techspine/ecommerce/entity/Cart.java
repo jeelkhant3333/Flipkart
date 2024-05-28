@@ -7,13 +7,14 @@ import java.util.Set;
 
 @Entity
 public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true ,fetch = FetchType.EAGER)
     @Column(name = "cart_items")
     private Set<CartItem> cartItems = new HashSet<>();
     @Column(name = "total_price")
@@ -24,6 +25,7 @@ public class Cart {
     private int discount;
 
     public Cart() {
+
     }
 
     public Cart(Long id, User user, Set<CartItem> cartItems, double totalPrice, int totalItem, int totalDiscountedPrice, int discount) {

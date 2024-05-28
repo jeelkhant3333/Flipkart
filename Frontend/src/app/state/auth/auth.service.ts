@@ -15,18 +15,18 @@ export class AuthService {
 
     private apiUrl = BASE_API_URL + '/auth';
 
-    constructor(private store: Store) { }
+    constructor(private store: Store,private http:HttpClient) { }
 
-    login(logindata: any, http: HttpClient) {
-        return http.post(`${this.apiUrl}/signin`, logindata)
+    login(logindata: any) {
+        return this.http.post(`${this.apiUrl}/signin`, logindata)
             .pipe(
                 map((user: any) => {
                     if (user.jwt) {
                         localStorage.setItem("jwt", user.jwt);
                         // console.log(localStorage.getItem("jwt"))
                     }
-                    // console.log("user data",user)
-                    return loginSuccess(user)
+                    // console.log("auth user data",user.jwt)
+                    return loginSuccess({user:user.jwt})
                 }),
                 catchError((error) => {
                     return of(
@@ -38,20 +38,20 @@ export class AuthService {
                     )
                 })
             ).subscribe((action) => {
-                // console.log("action signin" , action.type)
+                console.log("action signin" , action)
                 this.store.dispatch(action)
             })
     }
 
-    register(userData: any, http: HttpClient) {
-        return http.post(`${this.apiUrl}/signup`, userData).pipe(
+    register(userData: any) {
+        return this.http.post(`${this.apiUrl}/signup`, userData).pipe(
             map((userProfile: any) => {
                 if (userProfile.jwt) {
                     localStorage.setItem("jwt", userProfile.jwt);
                     // console.log(userProfile.jwt)
                 }
 
-                return registerSuccess(userProfile)
+                return registerSuccess({user:userProfile})
             }),
             catchError((error) => {
                 return of(

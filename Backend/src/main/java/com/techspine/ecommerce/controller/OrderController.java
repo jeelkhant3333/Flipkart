@@ -1,5 +1,6 @@
 package com.techspine.ecommerce.controller;
 
+
 import com.techspine.ecommerce.entity.Address;
 import com.techspine.ecommerce.entity.Order;
 import com.techspine.ecommerce.entity.User;
@@ -25,28 +26,25 @@ public class OrderController {
 
     @PostMapping("/")
     public ResponseEntity<Order> createOrder(@RequestBody Address shippingAddress,
-                                             @RequestHeader("Authorization") String jwt)
-            throws UserException {
-        User user = userService.findUserProfileByJwt(jwt);
-        Order order = orderService.createOrder(user, shippingAddress);
+                                             @RequestHeader("Authorization") String jwt) throws UserException {
+        User user=userService.findUserProfileByJwt(jwt);
+        Order order=orderService.createOrder(user,shippingAddress);
         return new ResponseEntity<Order>(order, HttpStatus.CREATED);
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<Order>> usersOrderHistory(@RequestHeader("Authorization") String jwt)
-            throws UserException {
-        User user = userService.findUserProfileByJwt(jwt);
-        List<Order> orders = orderService.usersOrderHistory(user.getId());
-        return new ResponseEntity<>(orders, HttpStatus.CREATED);
+    public ResponseEntity<List<Order>> usersOrderHistory(@RequestHeader("Authorization") String jwt) throws UserException{
+        User user=userService.findUserProfileByJwt(jwt);
+        List<Order> orders=orderService.usersOrderHistory(user.getId());
+        return new ResponseEntity<>(orders,HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Order> findOrderById(@PathVariable("id") Long orderId,
-                                               @RequestHeader("Authorization") String jwt)
-            throws UserException, OrderException {
-        User user = userService.findUserProfileByJwt(jwt);
-        Order order = orderService.findOrderById(orderId);
+                                               @RequestHeader("Authorization") String jwt) throws UserException, OrderException {
+        User user=userService.findUserProfileByJwt(jwt);
+        Order order=orderService.findOrderById(orderId);
 
-        return new ResponseEntity<Order>(order, HttpStatus.ACCEPTED);
+        return new ResponseEntity<Order>(order,HttpStatus.ACCEPTED);
     }
 }

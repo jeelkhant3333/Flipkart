@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
+export const cartRequest = '[Cart] Get Cart Request'
 
 export const addItemToCartRequest = createAction(
     '[Cart] Add Item To Cart Request', props<{ reqData: any }>());
@@ -11,7 +12,7 @@ export const addItemToCartFailure = createAction(
     '[Cart] Add Item To Cart Failure', props<{ error: any }>());
 
 export const getCartRequest = createAction(
-    '[Cart] Get Cart Request',);
+    cartRequest);
 
 export const getCartSuccess = createAction(
     '[Cart] Get Cart Success', props<{ payload: any }>());

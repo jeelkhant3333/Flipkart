@@ -8,6 +8,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { map, catchError, of } from 'rxjs';
 import { registerSuccess, registerFailure } from '../../../state/auth/auth.actions';
 import { Store } from '@ngrx/store';
+import { AppState } from '../../../models/AppState';
+import { privateDecrypt } from 'crypto';
+import { UserService } from '../../../state/user/user.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-signup',
@@ -27,12 +31,15 @@ export class SignupComponent {
   constructor(private formBuilder: FormBuilder,
     private authService:AuthService,
     private http:HttpClient,
-    private store:Store
+    private store:Store<AppState>,
+    private userService:UserService,
+    private dilouge: MatDialog,
      ) {
 
   }
 
   @Input() changeTemplate: any;
+  
 
   loginForm: FormGroup = this.formBuilder.group({
     firstName: ['', [Validators.required]],
@@ -44,8 +51,13 @@ export class SignupComponent {
 
   submitForm(): void {
     if (this.loginForm.valid) {
-      this.authService.register(this.loginForm.value,this.http)
-      console.log("valid", this.loginForm.value)
+      this.authService.register(this.loginForm.value)
+      this.store.select('auth').subscribe((data)=>{
+        this.userService.getUserProfile()
+        console.log("helloooooooo")
+        this.dilouge.closeAll()
+      })
+
     }
   }
 
