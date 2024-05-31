@@ -1,4 +1,5 @@
 import { CartState } from "../state/cart/cart.reducer";
+import { OrderState } from "../state/orders/orders.reducer";
 import { ProductState } from "../state/product/product.reducer";
 
 export interface AppState{
@@ -6,12 +7,13 @@ export interface AppState{
     auth:any,
     product:ProductState,
     cart:CartState,
-    order:any,
+    order:OrderState,
 }
 
 
 export interface UserState{
     user:any,
+    address:any[]
     loading: boolean,
     error: string
 }

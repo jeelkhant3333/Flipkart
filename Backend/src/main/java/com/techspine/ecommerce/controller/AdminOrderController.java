@@ -16,8 +16,12 @@ import java.util.List;
 @RequestMapping("/api/admin/orders")
 public class AdminOrderController {
 
+
+    private final OrderService orderService;
     @Autowired
-    private OrderService orderService;
+    AdminOrderController(OrderService orderService){
+        this.orderService = orderService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Order>> getAllOrdersHandler() {

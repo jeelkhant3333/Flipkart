@@ -1,1 +1,52 @@
-<p>payment-success works!</p>
+<div class="p-10 lg:py-36">
+
+    <div class="py-5">
+
+        <h2 class="text-center py-2">
+            ORDER STATUS<p class="text-[#267a2a]">
+                {{order.orderStatus}}
+            </p>
+        </h2>
+    </div>
+
+    <div>
+
+
+
+        <div class="p-5 shadow-lg box mb-5 bg-white">
+
+            <app-address-card [address]="address"></app-address-card>
+
+        </div>
+
+        <div class="space-y-5 p-5 box bg-white">
+            <ng-container *ngFor="let item of order.orderItems">
+
+                <div class="rounded-md p-5 lg:flex items-center justify-between box">
+                    <div class="flex items-center">
+
+                        <img class="w-20 h-20 object-cover object-top" [src]="[item.product.imageUrl]" alt="">
+
+                        <div class="ml-5 space-y-2">
+
+                            <p class="text-lg font-semibold">{{item.product.title}}</p>
+
+                            <p class="opacity-50 text-xs font-semibold space-x-5">
+                                <span>Color: Pink</span>
+                                <span>Size: {{item.size}}</span>
+                            </p>
+                            <p>
+                                Seller: {{item.product.brand}}
+                            </p>
+                            <p>₹{{item.product.discountedPrice}}</p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </ng-container>
+
+        </div>
+    </div>
+</div>

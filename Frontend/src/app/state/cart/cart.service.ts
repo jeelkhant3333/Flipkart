@@ -31,7 +31,7 @@ export class CartService {
             .pipe(
                 map((data: any) => {
                     console.log("added item to cart", data)
-                    return addItemToCartSuccess({ payload: data })
+                    return addItemToCartSuccess({ payload: reqData })
                 }),
                 catchError((error: any) => {
                     console.log("error", error)

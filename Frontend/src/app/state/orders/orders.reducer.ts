@@ -26,10 +26,10 @@ export const orderReducer = createReducer(
             error: null,
         })),
 
-    on(OrderActions.createOrderSuccess, (state, { order }) => ({
+    on(OrderActions.createOrderSuccess, (state, action) => ({
         ...state,
         loading: false,
-        order,
+        order:action.order,
     })),
 
     on(OrderActions.createOrderFailure,
@@ -47,9 +47,9 @@ export const orderReducer = createReducer(
         order
     })),
 
-    on(OrderActions.getOrderHistorySuccess, (state, { orders }) => ({
+    on(OrderActions.getOrderHistorySuccess, (state, {orders}) => ({
         ...state,
         loading: false,
-        orders
+        orders:orders
     }))
 )

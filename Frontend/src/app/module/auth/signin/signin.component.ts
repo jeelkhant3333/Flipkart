@@ -51,9 +51,7 @@ export class SigninComponent {
       if(this.loginForm.valid){
       this.authService.login(this.loginForm.value)
       this.store.select('auth').subscribe(()=>{
-        console.log('hiiiiiiiiiiii')
         this.userService.getUserProfile()
-        console.log("byyyyyyyyyyyyy")
         this.dilouge.closeAll()
       })
 

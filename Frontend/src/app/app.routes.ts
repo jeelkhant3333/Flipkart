@@ -23,6 +23,7 @@ export const routes: Routes = [
     {path:":levelOne/:levelTwo/:levelThree" , component:ProductsComponent},
     {path:"account/orders" , component:OrderComponent},
     {path:"order/:id" , component:OrderDetailsComponent},
+    {path:"payment-success" , component:PaymentSuccessComponent},
     
     
 

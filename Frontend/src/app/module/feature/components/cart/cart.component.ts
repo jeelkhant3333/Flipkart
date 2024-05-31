@@ -54,7 +54,7 @@ export class CartComponent {
   }
 
   navigateToChechout() {
-    this.cartService.getCart()
+    
     this.router.navigate(["checkout"]);
   }
 

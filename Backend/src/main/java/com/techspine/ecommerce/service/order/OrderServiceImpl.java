@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
         userRepository.save(user);
 
         Cart cart=cartItemService.findUserCart(user.getId());
-        System.out.println("cart " + cart.getUser());
+//        System.out.println("cart " + cart.getUser());
         List<OrderItem> orderItems=new ArrayList<>();
 
         for(CartItem item:cart.getCartItems()){

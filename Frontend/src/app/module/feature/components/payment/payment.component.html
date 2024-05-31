@@ -16,7 +16,8 @@
                     <ng-container>
     
                         <div *ngFor="let product of products.orderItems; let last=last">
-                            <app-cart-item [cartItem]="product"/>
+                            <!-- <app-cart-item [cartItem]="product"/> -->
+                            <app-payment-card [orderItems] = "product"/>
                        
                         </div>
     
@@ -39,13 +40,13 @@
                             <div class="flex justify-between my-5">
     
                                 <span>Total Price</span>
-                                <span>₹5999</span>
+                                <span>₹{{products.totalPrice}}</span>
     
                             </div>
                             <div class="flex justify-between my-5">
     
                                 <span>Discount</span>
-                                <span class="text-green-600">- ₹3000</span>
+                                <span class="text-green-600">- ₹{{products.discount}}</span>
     
                             </div>
                             <div class="flex justify-between my-5">
@@ -59,7 +60,7 @@
                             <div class="flex justify-between font-medium text-lg my-5">
     
                                 <span>Total Amount</span>
-                                <span class="text-green-600">₹3000</span>
+                                <span class="text-green-600">₹{{products.totalDiscountedPrice}}</span>
     
                             </div>
     
@@ -67,10 +68,11 @@
     
                         <div class="px-6 pb-5">
                             <button 
+                            (click)="navigetToPayment()"
                             mat-flat-button 
                             style="padding: 0.5rem; color: white;"
                             class="text-lg py-3 px-10 w-full matBgColor hover:scale-105"
-                            >CHECKOUT</button>
+                            >PAYMENT</button>
                         </div>
                        
                     </div>

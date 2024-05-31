@@ -31,10 +31,10 @@ public class CartItemController {
                                                       @PathVariable Long id) throws UserException, CartitemException, ProductException {
         User user = userService.findUserProfileByJwt(jwt);
         CartItem item = cartItemService.findCartItemById(id);
-        System.out.println("cart item found   " + item.getId());
+//        System.out.println("cart item found   " + item.getId());
         cartService.removeCartItem(user.getId(), item.getId());
         ApiResponse res = new ApiResponse();
-        res.setMessage("Cart item deleted successfully.");
+//        res.setMessage("Cart item deleted successfully.");
         res.setStatus(true);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }

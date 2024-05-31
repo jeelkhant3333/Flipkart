@@ -1,0 +1,29 @@
+<div class="p-5 box">
+
+    <div class="flex items-center">
+
+        <div class="w-[5rem] h-[5rem] lg:w-[9rem] lg:h-[9rem]">
+
+            <img class="w-full h-full object-cover object-top"
+                [src]="orderItems.product.imageUrl"
+                alt="">
+
+        </div>
+
+        <div class="ml-5 space-y-1">
+            <p class="font-medium text-[16px]">{{orderItems.product.title}}</p>
+            <p class="textGray">Size: {{orderItems.size}} | Color: {{orderItems.product.color}}</p>
+            <p class="textGray">Seller : {{orderItems.product.brand}}</p>
+
+            <div class="flex space-x-2 items-center pt-3">
+
+                <p class="textGray line-through textGray-[14px]">₹{{orderItems.product.price}}</p>
+                <p class="font-medium text-[18px]">₹{{orderItems.discountedPrice}}</p>
+                <p class="text-[#388e3c] font-medium text-[14px]">{{orderItems.product.discountPercent}}%</p>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

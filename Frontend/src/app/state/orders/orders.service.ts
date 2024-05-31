@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 import { BASE_API_URL } from "../../config/api";
 import { map, catchError, of } from "rxjs";
 import { createOrderFailure, createOrderSuccess, getOrderByIdFailure, getOrderByIdSuccess, getOrderHistoryFailure, getOrderHistoryRequest, getOrderHistorySuccess } from "./orders.action";
+import { AppState } from "../../models/AppState";
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +15,7 @@ export class OrderService {
     headers: any
 
     constructor(
-        private store: Store,
+        private store: Store<AppState>,
         private http: HttpClient,
         private router: Router,
         private route: ActivatedRoute
@@ -26,6 +27,8 @@ export class OrderService {
     }
 
     createOrder(reqData: any) {
+        console.log("order req" , reqData);
+        
         const url = `${this.API_BASE_URL}/api/orders/`;
         return this.http.post(url, reqData, { headers: this.headers })
             .pipe(
@@ -39,6 +42,7 @@ export class OrderService {
                     return createOrderSuccess({ order: data });
                 }),
                 catchError((error: any) => {
+                    console.log("order created error" , error)
                     return of(
                         createOrderFailure(
                             error.response?.data?.message
@@ -52,13 +56,11 @@ export class OrderService {
     getOrderById(orderId: string) {
         // console.log("orderid" , orderId);
         const url = `${this.API_BASE_URL}/api/orders/${orderId}`;
-        return this.http
-            .get(url, { headers: this.headers })
+        return this.http.get(url, { headers: this.headers })
             .pipe(
                 map((data: any) => {
                     console.log('order by id', data);
-                    getOrderByIdSuccess({ order: data });
-                    return data
+                    return getOrderByIdSuccess({ order: data })
                 }),
                 catchError((error: any) => {
                     return of(
@@ -68,7 +70,7 @@ export class OrderService {
                                 : error.message
                         ))
                 })
-            )
+            ).subscribe((action) => this.store.dispatch(action));
     }
 
     getOrderHistory() {
@@ -81,6 +83,8 @@ export class OrderService {
                     return getOrderHistorySuccess({ orders: data });
                 }),
                 catchError((error: any) => {
+                    console.log("history error" , error);
+                    
                     return of(
                         getOrderHistoryFailure(
                             error.response?.data?.message
