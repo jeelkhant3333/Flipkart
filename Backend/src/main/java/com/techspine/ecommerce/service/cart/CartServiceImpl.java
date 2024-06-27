@@ -36,13 +36,12 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public String addCartItem(Long userId, AddItemRequest req) throws ProductException {
+    public CartItem addCartItem(Long userId, AddItemRequest req) throws ProductException {
         Cart cart = cartRepository.findByUserId(userId);
         Product product = productService.findProductById(req.getProductId());
 
         CartItem cartItem = cartItemService.isCartItemExist(cart,product, req.getSize(), userId);
 
-        if (cartItem == null){
             CartItem newItem = new CartItem();
             newItem.setProduct(product);
             newItem.setCart(cart);
@@ -53,8 +52,8 @@ public class CartServiceImpl implements CartService{
 
             CartItem createCartItem = cartItemService.createCartItem(newItem);
             cart.getCartItems().add(createCartItem);
-        }
-        return "Item Added";
+
+        return createCartItem;
     }
 
     @Override

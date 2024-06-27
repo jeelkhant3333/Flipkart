@@ -1,5 +1,6 @@
 import { CartState } from "../state/cart/cart.reducer";
 import { OrderState } from "../state/orders/orders.reducer";
+import { PaymentState } from "../state/payment/payment.reducer";
 import { ProductState } from "../state/product/product.reducer";
 
 export interface AppState{
@@ -8,6 +9,7 @@ export interface AppState{
     product:ProductState,
     cart:CartState,
     order:OrderState,
+    payment:PaymentState
 }
 
 

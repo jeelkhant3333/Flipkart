@@ -108,7 +108,8 @@ public class PaymentController {
         notify.put("email", true);
 
         paymentLinkRequest.put("notify", notify);
-        paymentLinkRequest.put("callback_url", "http://localhost:4200/payment-success?order_id=" + order.getOrderId());
+
+        paymentLinkRequest.put("callback_url", "http://localhost:4200/payment-success?order_id=" + order.getId());
         paymentLinkRequest.put("callback_method", "get");
         return paymentLinkRequest;
     }

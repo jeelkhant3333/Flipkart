@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { BASE_API_URL } from "../../config/api";
 import { map, catchError, of, Observable } from "rxjs";
-import { addItemToCartFailure, addItemToCartSuccess, getCartFailure, getCartSuccess, removeCartItemFailure, removeCartItemSuccess, updateCartItemFailure, updateCartItemSuccess } from "./cart.action";
+import { addItemToCartFailure, addItemToCartSuccess, getCartFailure, getCartRequest, getCartSuccess, removeCartItemFailure, removeCartItemSuccess, updateCartItemFailure, updateCartItemSuccess } from "./cart.action";
 import { AppState } from "../../models/AppState";
 
 @Injectable({
@@ -31,7 +31,7 @@ export class CartService {
             .pipe(
                 map((data: any) => {
                     console.log("added item to cart", data)
-                    return addItemToCartSuccess({ payload: reqData })
+                    return addItemToCartSuccess({ item: data})
                 }),
                 catchError((error: any) => {
                     console.log("error", error)
@@ -43,7 +43,9 @@ export class CartService {
                         ))
                 })
             ).subscribe((action) => {
+                console.log("action payload",action);
                 this.store.dispatch(action)
+                this.store.dispatch(getCartRequest())
             })
     }
 

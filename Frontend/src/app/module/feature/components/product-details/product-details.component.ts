@@ -73,7 +73,7 @@ export class ProductDetailsComponent {
     } else {
       const data = { size: this.selectedSize, productId: this.productId }
       this.cartService.addItemToCart(data)
-      this.cartService.getCart()
+      // this.cartService.getCart()
       this.router.navigate(["cart"]);
     }
 

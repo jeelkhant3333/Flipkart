@@ -12,7 +12,7 @@ import { OrderState } from '../../../../state/orders/orders.reducer';
 @Component({
   selector: 'app-payment-success',
   standalone: true,
-  imports: [CommonModule,AddressCardComponent],
+  imports: [CommonModule, AddressCardComponent],
   templateUrl: './payment-success.component.html',
   styleUrl: './payment-success.component.scss'
 })
@@ -21,27 +21,30 @@ export class PaymentSuccessComponent {
 
   orderId: any
   paymentId: any
-  order:any;
-  orderItems!:any[] ;
-  address:any
+  order: any;
+  orderItems!: any[];
+  address: any
+  status: any = "PENDING"
 
-  constructor(private orderService: OrderService, private paymentService: PaymentService, private route: ActivatedRoute, private store: Store<PaymentState>) {}
+  constructor(private orderService: OrderService, private paymentService: PaymentService, private route: ActivatedRoute, private store: Store<AppState>) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.orderId = params['order_id']
       this.paymentId = params['razorpay_payment_id']
     })
-    this.orderService.getOrderById(this.orderId)
     this.paymentService.updatePayment({
       orderId: this.orderId,
       paymentId: this.paymentId
     })
 
-    this.store.select('order').subscribe((res)=>{
+    this.store.select('payment').subscribe((res) => {
+      console.log("res", res);
+
       this.order = res.order
-      this.orderItems  = res.order.orderItems
+      this.orderItems = res.order.orderItems
       this.address = res.order.shippingAddress
+      this.status = res.order.orderStatus
     })
   }
 

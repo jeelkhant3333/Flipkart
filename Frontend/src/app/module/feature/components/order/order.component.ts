@@ -5,7 +5,6 @@ import { OrderCardComponent } from "./order-card/order-card.component";
 import { Router } from '@angular/router';
 import { OrderService } from '../../../../state/orders/orders.service';
 import { Store } from '@ngrx/store';
-import { OrderState } from '../../../../state/orders/orders.reducer';
 import { AppState } from '../../../../models/AppState';
 
 @Component({

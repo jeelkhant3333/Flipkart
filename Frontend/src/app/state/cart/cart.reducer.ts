@@ -34,7 +34,7 @@ export const cartReducer = createReducer(
     on(CartActions.addItemToCartSuccess, (state, action) => ({
         ...state,
         loading: false,
-        cartItems: [...state.cartItems, action.payload],
+        cartItems: [...state.cartItems, action.item],
     })),
 
     on(CartActions.addItemToCartFailure,

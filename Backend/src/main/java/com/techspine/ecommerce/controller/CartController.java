@@ -1,11 +1,11 @@
 package com.techspine.ecommerce.controller;
 
 import com.techspine.ecommerce.entity.Cart;
+import com.techspine.ecommerce.entity.CartItem;
 import com.techspine.ecommerce.entity.User;
 import com.techspine.ecommerce.exception.ProductException;
 import com.techspine.ecommerce.exception.UserException;
 import com.techspine.ecommerce.request.AddItemRequest;
-import com.techspine.ecommerce.response.ApiResponse;
 import com.techspine.ecommerce.service.cart.CartService;
 import com.techspine.ecommerce.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +34,12 @@ public class CartController {
     }
 
     @PutMapping("/add")
-    public ResponseEntity<ApiResponse> addItemToCart(@RequestBody AddItemRequest request , @RequestHeader("Authorization") String jwt) throws UserException , ProductException{
+    public ResponseEntity<CartItem> addItemToCart(@RequestBody AddItemRequest request , @RequestHeader("Authorization") String jwt) throws UserException , ProductException{
 
         User user = userService.findUserProfileByJwt(jwt);
-        cartService.addCartItem(user.getId(), request);
-        ApiResponse response = new ApiResponse("Item Added" , true);
+       CartItem cartItem = cartService.addCartItem(user.getId(), request);
 
-        return new ResponseEntity<ApiResponse>(response,HttpStatus.OK);
+        return new ResponseEntity<>(cartItem,HttpStatus.OK);
     }
 
 

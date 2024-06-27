@@ -6,7 +6,7 @@ export const addItemToCartRequest = createAction(
     '[Cart] Add Item To Cart Request', props<{ reqData: any }>());
 
 export const addItemToCartSuccess = createAction(
-    '[Cart] Add Item To Cart Success', props<{ payload: any }>());
+    '[Cart] Add Item To Cart Success', props<{ item: any }>());
 
 export const addItemToCartFailure = createAction(
     '[Cart] Add Item To Cart Failure', props<{ error: any }>());
